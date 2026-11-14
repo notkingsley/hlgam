@@ -1,0 +1,100 @@
+run:
+  name: motion_transformer_v1
+  seed: 1337
+  output_root: runs/motion
+data:
+  csv_path: data/motion_sequences/motion_sequence_frames.csv
+  label_schema_path: training/label_schemas/motion_labels.json
+  sequence_length: 32
+  window_stride: 4
+  min_interval_overlap: 0.25
+  endpoint_positive: true
+  batch_size: 32
+  val_fraction: 0.15
+  test_fraction: 0.15
+  num_workers: 0
+  limit_samples:
+features:
+  coordinate_space: normalized
+  landmark_axes: [x, y, z]
+  global_feature_names:
+    - feature_scale
+    - feature_palm_center_x
+    - feature_palm_center_y
+    - feature_palm_center_z
+    - feature_pinch_distance
+    - feature_pinch_delta
+    - feature_velocity_x
+    - feature_velocity_y
+    - feature_velocity_z
+    - feature_speed
+    - feature_direction_x
+    - feature_direction_y
+    - feature_direction_z
+    - feature_bbox_min_x
+    - feature_bbox_min_y
+    - feature_bbox_max_x
+    - feature_bbox_max_y
+    - feature_finger_curl_thumb
+    - feature_finger_curl_index
+    - feature_finger_curl_middle
+    - feature_finger_curl_ring
+    - feature_finger_curl_pinky
+model:
+  spatial_d_model: 128
+  spatial_layers: 2
+  spatial_heads: 4
+  spatial_ffn_dim: 512
+  temporal_d_model: 256
+  temporal_layers: 4
+  temporal_heads: 8
+  temporal_ffn_dim: 1024
+  dropout: 0.1
+  use_global_features: true
+  causal: false
+loss:
+  primary_loss: bce
+  use_pos_weight: true
+  focal_alpha: 0.25
+  focal_gamma: 2.0
+  phase_weight: 0.5
+  direction_weight: 0.1
+  displacement_weight: 0.1
+  velocity_weight: 0.1
+  duration_weight: 0.05
+  scale_weight: 0.05
+  rotation_weight: 0.05
+  draw_weight: 0.05
+optimizer:
+  lr: 0.0003
+  weight_decay: 0.01
+  betas: [0.9, 0.999]
+scheduler:
+  warmup_ratio: 0.05
+  min_lr_ratio: 0.1
+training:
+  max_epochs: 150
+  grad_clip_norm: 1.0
+  amp: true
+  early_stopping_patience: 35
+  selection_metric: macro_f1
+  selection_mode: max
+  threshold: 0.5
+checkpointing:
+  save_best: true
+  save_last: true
+plots:
+  enabled: true
+  loss_filename: training_validation_loss.png
+  validation_metrics_filename: validation_metrics.png
+  validation_metric_names:
+    - macro_f1
+    - micro_f1
+    - macro_precision
+    - macro_recall
+    - micro_precision
+    - micro_recall
+    - exact_match
+    - hamming_loss
+    - phase_accuracy
+    - direction_accuracy

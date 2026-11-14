@@ -1,0 +1,26 @@
+base_config: training/configs/static_pose_transformer.yaml
+search:
+  name: static_pose_loss_grid
+  output_root: runs/static_pose_loss_grid
+  trial_output_root:
+  selection_metric:
+  selection_mode:
+  max_trials:
+  continue_on_error: false
+  dry_run: false
+trial_overrides:
+  plots:
+    enabled: false
+loss_grid:
+  - primary_loss: [bce]
+    use_pos_weight: [true, false]
+    finger_count_weight: [0.0, 0.2, 0.5]
+    point_direction_weight: [0.0, 0.2, 0.5]
+    flat_direction_weight: [0.0, 0.2, 0.5]
+  - primary_loss: [focal]
+    use_pos_weight: [true]
+    focal_alpha: [0.25, 0.5]
+    focal_gamma: [1.0, 2.0]
+    finger_count_weight: [0.0, 0.2, 0.5]
+    point_direction_weight: [0.0, 0.2, 0.5]
+    flat_direction_weight: [0.0, 0.2, 0.5]

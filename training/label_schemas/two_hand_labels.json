@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "model_family": "two_hand",
+  "multi_label": true,
+  "labels": [
+    "TWO_HAND_ZOOM_IN",
+    "TWO_HAND_ZOOM_OUT",
+    "TWO_HAND_ROTATE_CLOCKWISE",
+    "TWO_HAND_ROTATE_COUNTERCLOCKWISE",
+    "CLAP",
+    "FRAME_RECTANGLE",
+    "TWO_HAND_PAN"
+  ],
+  "notes": "Two-handed pose capture stores one row per accepted pair pose in training/capture_two_handed_poses.py CSV rows. Directional or geometric variants are stored in target_variant and pair feature columns."
+}

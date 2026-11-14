@@ -1,0 +1,85 @@
+run:
+  name: static_pose_transformer_v1
+  seed: 1337
+  output_root: runs/static_pose
+data:
+  csv_path: data/static_poses/static_pose_frames.csv
+  label_schema_path: training/label_schemas/static_pose_labels.json
+  batch_size: 64
+  val_fraction: 0.15
+  test_fraction: 0.15
+  num_workers: 0
+  limit_rows:
+features:
+  coordinate_space: normalized
+  landmark_axes: [x, y, z]
+  global_feature_names:
+    - feature_scale
+    - feature_palm_center_x
+    - feature_palm_center_y
+    - feature_palm_center_z
+    - feature_pinch_distance
+    - feature_pinch_delta
+    - feature_velocity_x
+    - feature_velocity_y
+    - feature_velocity_z
+    - feature_speed
+    - feature_direction_x
+    - feature_direction_y
+    - feature_direction_z
+    - feature_bbox_min_x
+    - feature_bbox_min_y
+    - feature_bbox_max_x
+    - feature_bbox_max_y
+    - feature_finger_curl_thumb
+    - feature_finger_curl_index
+    - feature_finger_curl_middle
+    - feature_finger_curl_ring
+    - feature_finger_curl_pinky
+model:
+  d_model: 128
+  num_layers: 4
+  num_heads: 4
+  ffn_dim: 512
+  dropout: 0.1
+  use_global_features: true
+  auxiliary_heads: true
+loss:
+  primary_loss: bce
+  use_pos_weight: true
+  focal_alpha: 0.25
+  focal_gamma: 2.0
+  finger_count_weight: 0.2
+  point_direction_weight: 0.2
+  flat_direction_weight: 0.2
+optimizer:
+  lr: 0.0003
+  weight_decay: 0.01
+  betas: [0.9, 0.999]
+scheduler:
+  warmup_ratio: 0.05
+  min_lr_ratio: 0.1
+training:
+  max_epochs: 150
+  grad_clip_norm: 1.0
+  amp: true
+  early_stopping_patience: 25
+  selection_metric: macro_f1
+  selection_mode: max
+  threshold: 0.5
+checkpointing:
+  save_best: true
+  save_last: true
+plots:
+  enabled: true
+  loss_filename: training_validation_loss.png
+  validation_metrics_filename: validation_metrics.png
+  validation_metric_names:
+    - macro_f1
+    - micro_f1
+    - macro_precision
+    - macro_recall
+    - micro_precision
+    - micro_recall
+    - exact_match
+    - hamming_loss

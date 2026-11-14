@@ -1,0 +1,291 @@
+camera:
+  index: 0
+  width: 1280
+  height: 720
+  fps: 30
+  mirror: true
+
+recognition:
+  fsm:
+    enabled: true
+  models:
+    static_pose:
+      enabled: false
+      pose:
+        enabled: true
+      finger_count:
+        enabled: true
+      finger_pointing:
+        enabled: true
+      flat_hand:
+        enabled: true
+    motion:
+      enabled: false
+
+gestures:
+  pinch_drag:
+    enabled: true
+    distance_threshold: 0.12
+    release_threshold: 0.16
+    hold_ms: 120
+    drag_pinch_threshold: 0.12
+    drag_release_threshold: 0.16
+    drag_activation_hold_ms: 150
+    drag_min_move: 0.002
+    pinch_tap_distance_threshold: 0.12
+    pinch_tap_release_threshold: 0.16
+    pinch_tap_min_duration_ms: 20
+    pinch_tap_max_duration_ms: 180
+  swipe_motion:
+    enabled: true
+    min_velocity: 0.65
+    min_distance: 0.12
+    diagonal_swipe_min_distance: 0.16
+    diagonal_swipe_axis_balance_ratio: 2.25
+    max_duration_ms: 500
+    cooldown_ms: 300
+    direction_ratio: 1.35
+  zoom:
+    enabled: true
+    min_reference_distance: 0.04
+    min_delta: 0.08
+    min_duration_ms: 120
+    max_duration_ms: 700
+    cooldown_ms: 250
+  pose:
+    enabled: true
+    min_hold_ms: 80
+    cooldown_ms: 250
+    pinch_distance_threshold: 0.12
+    ok_distance_threshold: 0.14
+    spread_distance_threshold: 0.45
+    direction_ratio: 1.25
+    l_shape_min_angle_degrees: 55.0
+    l_shape_max_angle_degrees: 125.0
+  finger_count:
+    enabled: true
+    min_hold_ms: 80
+    cooldown_ms: 250
+  finger_pointing:
+    enabled: true
+    min_hold_ms: 80
+    cooldown_ms: 250
+    direction_ratio: 1.25
+    min_vector_length: 0.05
+  flat_hand:
+    enabled: true
+    min_hold_ms: 80
+    cooldown_ms: 250
+    direction_ratio: 1.25
+  flick:
+    enabled: true
+    history_size: 16
+    max_history_ms: 1500
+    cooldown_ms: 250
+    direction_ratio: 1.35
+    min_velocity: 1.2
+    min_distance: 0.04
+    max_duration_ms: 180
+  motion:
+    enabled: true
+    history_size: 32
+    max_history_ms: 1500
+    cooldown_ms: 250
+    direction_ratio: 1.35
+    wave_min_amplitude: 0.08
+    wave_min_direction_changes: 3
+    wave_max_duration_ms: 1200
+    push_pull_min_scale_delta: 0.18
+    push_pull_max_duration_ms: 900
+    throw_min_distance: 0.12
+    throw_min_velocity: 0.8
+    throw_max_duration_ms: 900
+  rotation:
+    enabled: true
+    history_size: 32
+    max_history_ms: 1500
+    cooldown_ms: 250
+    circle_min_radius: 0.05
+    circle_min_arc_degrees: 300.0
+    circle_max_duration_ms: 1400
+    circle_closure_ratio: 1.5
+    rotate_min_degrees: 70.0
+    rotate_max_duration_ms: 1000
+  scroll:
+    enabled: true
+    history_size: 32
+    max_history_ms: 1500
+    cooldown_ms: 250
+    direction_ratio: 1.35
+    min_distance: 0.08
+    max_duration_ms: 900
+  air_draw:
+    enabled: true
+    min_distance: 0.01
+  two_hand:
+    enabled: true
+    cooldown_ms: 300
+    zoom_min_delta: 0.10
+    rotate_min_degrees: 35.0
+    pan_min_distance: 0.10
+    clap_distance_threshold: 0.14
+    clap_min_closing_delta: 0.08
+    frame_min_width: 0.30
+
+broker:
+  websocket:
+    enabled: false
+    host: "127.0.0.1"
+    port: 8765
+    require_jwt: true
+    jwt_env_file: ".env"
+    jwt_auth_timeout_seconds: 5.0
+  osc:
+    enabled: false
+    host: "127.0.0.1"
+    port: 9000
+
+gesture_events:
+  PINCH_START: true
+  PINCH_HOLD: true
+  PINCH_END: true
+  DRAG_START: true
+  DRAG_MOVE: true
+  DRAG_END: true
+  SWIPE_LEFT: true
+  SWIPE_RIGHT: true
+  SWIPE_UP: true
+  SWIPE_DOWN: true
+  ZOOM_IN: true
+  ZOOM_OUT: true
+  OPEN_PALM: true
+  FIST: true
+  POINT_INDEX: true
+  TWO_FINGER_POINT: true
+  PEACE_SIGN: true
+  OK_SIGN: true
+  THUMBS_UP: true
+  THUMBS_DOWN: true
+  FINGER_COUNT_1: true
+  FINGER_COUNT_2: true
+  FINGER_COUNT_3: true
+  FINGER_COUNT_4: true
+  FINGER_COUNT_5: true
+  FINGER_POINT_LEFT: true
+  FINGER_POINT_RIGHT: true
+  FINGER_POINT_UP: true
+  FINGER_POINT_DOWN: true
+  FINGER_POINT_UP_LEFT: true
+  FINGER_POINT_UP_RIGHT: true
+  FINGER_POINT_DOWN_LEFT: true
+  FINGER_POINT_DOWN_RIGHT: true
+  L_SHAPE: true
+  ROCK_SIGN: true
+  HANG_LOOSE: true
+  FLAT_HAND_LEFT: true
+  FLAT_HAND_RIGHT: true
+  FLAT_HAND_UP: true
+  FLAT_HAND_DOWN: true
+  DIAGONAL_SWIPE_UP_LEFT: true
+  DIAGONAL_SWIPE_UP_RIGHT: true
+  DIAGONAL_SWIPE_DOWN_LEFT: true
+  DIAGONAL_SWIPE_DOWN_RIGHT: true
+  FLICK_LEFT: true
+  FLICK_RIGHT: true
+  FLICK_UP: true
+  FLICK_DOWN: true
+  FLICK_UP_LEFT: true
+  FLICK_UP_RIGHT: true
+  FLICK_DOWN_LEFT: true
+  FLICK_DOWN_RIGHT: true
+  WAVE: true
+  PUSH: true
+  PULL: true
+  CIRCLE_CLOCKWISE: true
+  CIRCLE_COUNTERCLOCKWISE: true
+  ROTATE_CLOCKWISE: true
+  ROTATE_COUNTERCLOCKWISE: true
+  SCROLL_UP: true
+  SCROLL_DOWN: true
+  SCROLL_LEFT: true
+  SCROLL_RIGHT: true
+  PINCH_TAP: true
+  GRAB_AND_THROW: true
+  AIR_DRAW_START: true
+  AIR_DRAW_MOVE: true
+  AIR_DRAW_END: true
+  TWO_HAND_ZOOM_IN: true
+  TWO_HAND_ZOOM_OUT: true
+  TWO_HAND_ROTATE_CLOCKWISE: true
+  TWO_HAND_ROTATE_COUNTERCLOCKWISE: true
+  CLAP: true
+  FRAME_RECTANGLE: true
+  TWO_HAND_PAN: true
+
+gesture_mapping:
+  PINCH_START: CLICK_DOWN
+  PINCH_END: CLICK_UP
+  DRAG_MOVE: POINTER_DRAG
+  SWIPE_LEFT: NAVIGATE_BACK
+  SWIPE_RIGHT: NAVIGATE_FORWARD
+  OPEN_PALM: STOP
+  FIST: GRAB
+  POINT_INDEX: POINTER_MODE
+  TWO_FINGER_POINT: SCROLL_MODE
+  PEACE_SIGN: MODE_TOGGLE
+  OK_SIGN: CONFIRM
+  THUMBS_UP: APPROVE
+  THUMBS_DOWN: REJECT
+  L_SHAPE: REGION_SELECT
+  ROCK_SIGN: SHORTCUT_ONE
+  HANG_LOOSE: SHORTCUT_TWO
+  FLAT_HAND_LEFT: DIRECTION_LEFT
+  FLAT_HAND_RIGHT: DIRECTION_RIGHT
+  FLAT_HAND_UP: DIRECTION_UP
+  FLAT_HAND_DOWN: DIRECTION_DOWN
+  FINGER_COUNT_1: COUNT_ONE
+  FINGER_COUNT_2: COUNT_TWO
+  FINGER_COUNT_3: COUNT_THREE
+  FINGER_COUNT_4: COUNT_FOUR
+  FINGER_COUNT_5: COUNT_FIVE
+  FINGER_POINT_LEFT: POINT_LEFT
+  FINGER_POINT_RIGHT: POINT_RIGHT
+  FINGER_POINT_UP: POINT_UP
+  FINGER_POINT_DOWN: POINT_DOWN
+  FINGER_POINT_UP_LEFT: POINT_UP_LEFT
+  FINGER_POINT_UP_RIGHT: POINT_UP_RIGHT
+  FINGER_POINT_DOWN_LEFT: POINT_DOWN_LEFT
+  FINGER_POINT_DOWN_RIGHT: POINT_DOWN_RIGHT
+  DIAGONAL_SWIPE_UP_LEFT: DIAGONAL_UP_LEFT
+  DIAGONAL_SWIPE_UP_RIGHT: DIAGONAL_UP_RIGHT
+  DIAGONAL_SWIPE_DOWN_LEFT: DIAGONAL_DOWN_LEFT
+  DIAGONAL_SWIPE_DOWN_RIGHT: DIAGONAL_DOWN_RIGHT
+  FLICK_LEFT: QUICK_LEFT
+  FLICK_RIGHT: QUICK_RIGHT
+  FLICK_UP: QUICK_UP
+  FLICK_DOWN: QUICK_DOWN
+  WAVE: WAVE_TOGGLE
+  PUSH: PUSH_FORWARD
+  PULL: PULL_BACK
+  CIRCLE_CLOCKWISE: CYCLE_NEXT
+  CIRCLE_COUNTERCLOCKWISE: CYCLE_PREVIOUS
+  ROTATE_CLOCKWISE: ROTATE_RIGHT
+  ROTATE_COUNTERCLOCKWISE: ROTATE_LEFT
+  SCROLL_UP: SCROLL_UP
+  SCROLL_DOWN: SCROLL_DOWN
+  SCROLL_LEFT: SCROLL_LEFT
+  SCROLL_RIGHT: SCROLL_RIGHT
+  PINCH_TAP: TAP
+  GRAB_AND_THROW: THROW
+  AIR_DRAW_START: DRAW_START
+  AIR_DRAW_MOVE: DRAW_MOVE
+  AIR_DRAW_END: DRAW_END
+  ZOOM_IN: SCALE_UP
+  ZOOM_OUT: SCALE_DOWN
+  TWO_HAND_ZOOM_IN: SCALE_UP_LARGE
+  TWO_HAND_ZOOM_OUT: SCALE_DOWN_LARGE
+  TWO_HAND_ROTATE_CLOCKWISE: ROTATE_RIGHT_LARGE
+  TWO_HAND_ROTATE_COUNTERCLOCKWISE: ROTATE_LEFT_LARGE
+  CLAP: CLAP_ACTION
+  FRAME_RECTANGLE: CAMERA_FRAME
+  TWO_HAND_PAN: PAN_VIEW

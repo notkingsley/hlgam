@@ -1,0 +1,35 @@
+[project]
+name = "gesture-app"
+version = "0.1.0"
+description = "High-Level Gesture Abstraction Middleware for gesture-controlled interfaces."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+	"mediapipe==0.10.21",
+	"opencv-python>=4.10,<5",
+	"pyjwt[crypto]>=2.13.0",
+	"python-dotenv>=1.2.2",
+	"PyYAML",
+	"websockets",
+]
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[project.optional-dependencies]
+ml = [
+	"matplotlib>=3.8.0",
+	"torch>=2.3.0",
+]
+dev = [
+	"pytest>=8.2.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
